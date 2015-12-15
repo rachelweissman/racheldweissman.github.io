@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="Rachel">
   <head>
     <meta charset="utf-8">
     <title>Welceom to my site!</title>
   </head>
   <body>
     <h1>Hi!</h1>
+    <div ng-controller="HelloController as vm">
+      <h1 ng-bind="vm.headline"></h1>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-rc.0/angular.min.js" charset="utf-8"></script>
     <script>
-      console.log("Hello!");
+      (function() {
+        angular.module("Rachel", []);
+
+        angular.module("Rachel").controller("HelloController", HelloController);
+
+        HelloController.$inject = ["$log"];
+        function HelloController($log) {
+          var vm = this;
+          vm.headline = "Hello. from AngularJS!";
+
+          activate();
+
+          function activate() {
+            $log.debug("Activated HelloController");
+          }
+
+        }
+      })();
     </script>
   </body>
 </html>
